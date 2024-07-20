@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardContent,
@@ -10,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ModeToggle from "@/components/ModeToggle";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Recipe {
   title: string;
@@ -32,10 +35,18 @@ export default async function Home() {
   const recipes = await getRecipes();
 
   return (
-    <main>
+    <motion.main
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      exit={{ scale: 0 }}
+      transition={{
+        duration: 1,
+        ease: "easeInOut",
+      }}
+    >
       <ModeToggle />
       <div className="grid grid-cols-3 gap-8">
-        {recipes.map((recipe) => (
+        {recipes.map((recipe, i) => (
           <Card key={recipe.id} className="flex flex-col justify-between">
             <CardHeader className="flex-row gap-4 items-center">
               <Avatar>
@@ -57,6 +68,6 @@ export default async function Home() {
           </Card>
         ))}
       </div>
-    </main>
+    </motion.main>
   );
 }
