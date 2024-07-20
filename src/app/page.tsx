@@ -9,6 +9,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import ModeToggle from "@/components/ModeToggle";
 
 interface Recipe {
   title: string;
@@ -32,6 +33,7 @@ export default async function Home() {
 
   return (
     <main>
+      <ModeToggle />
       <div className="grid grid-cols-3 gap-8">
         {recipes.map((recipe) => (
           <Card key={recipe.id} className="flex flex-col justify-between">
